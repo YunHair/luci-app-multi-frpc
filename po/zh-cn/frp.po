@@ -481,7 +481,7 @@ msgstr "插件X-From-Where请求头"
 
 #: luasrc\controller\frp.lua:10
 msgid "Multi Frpc"
-msgstr "Multi Frpc 内网穿透"
+msgstr "MultiFrpc内网穿透"
 
 #: luasrc\model\cbi\frp\basic.lua:146
 msgid "Server List"
