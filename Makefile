@@ -14,6 +14,18 @@ PKG_NAME:=luci-app-multi-frpc
 PKG_VERSION:=1.0.1
 PKG_RELEASE:=2
 
+define Build/Compile  
+    $(call Build/Compile/Default)  
+    $(foreach po,$(wildcard $(PKG_BUILD_DIR)/po/*.po), \  
+        $(HOST_MSGFMT) -o $(PKG_BUILD_DIR)/$(basename $(notdir $(po))).lmo $(po) \  
+    )  
+endef  
+
+define Package/luci-app-multi-frpc/install  
+    $(INSTALL_DIR) $(1)/usr/lib/lua/luci/i18n  
+    $(CP) $(PKG_BUILD_DIR)/*.lmo $(1)/usr/lib/lua/luci/i18n/  
+endef
+
 include $(TOPDIR)/feeds/luci/luci.mk
 
 # call BuildPackage - OpenWrt buildroot signature
