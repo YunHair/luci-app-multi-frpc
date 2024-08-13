@@ -6,9 +6,11 @@ msgstr "Content-Type: text/plain; charset=UTF-8"
 msgid "Frp Setting"
 msgstr "Frp 内网穿透"
 
+#: luasrc\view\frp\frp_status.htm:10
 msgid "NOT RUNNING"
 msgstr "未运行"
 
+#: luasrc\view\frp\frp_status.htm:7
 msgid "RUNNING"
 msgstr "运行中"
 
@@ -493,8 +495,10 @@ msgstr "登陆用户"
 msgid "Plugin Log"
 msgstr "插件日志"
 
+#: luasrc\view\frp\client_log.htm:3
 msgid "Choose a server"
 msgstr "选择一个配置"
 
+#: luasrc\view\frp\client_log.htm:6
 msgid "Reload"
 msgstr "刷新"
