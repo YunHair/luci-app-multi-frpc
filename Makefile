@@ -9,6 +9,7 @@ include $(TOPDIR)/rules.mk
 LUCI_TITLE:=LuCI for FRPC
 LUCI_DEPENDS:=+wget +frpc
 LUCI_PKGARCH:=all
+LUCI_LANG:=zh-cn
 
 PKG_NAME:=luci-app-multi-frpc
 PKG_VERSION:=1.0.1
