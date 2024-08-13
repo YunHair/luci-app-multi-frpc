@@ -439,6 +439,7 @@ msgstr "将 frpc 与 frps 之间的通信内容加密传输，将会有效防止
 msgid "The contents will be compressed to speed up the traffic forwarding speed, but this will consume some additional cpu resources."
 msgstr "对传输内容进行压缩，加快流量转发速度，但是会额外消耗一些 cpu 资源。"
 
+#: luasrc\model\cbi\frp\config.lua:145
 msgid "Http username and password are safety certification for http protocol."
 msgstr "Http用户名和密码是Http协议的安全认证。"
 
@@ -482,14 +483,14 @@ msgstr "插件X-From-Where请求头"
 msgid "Multi Frpc"
 msgstr "Multi Frpc 内网穿透"
 
+#: luasrc\model\cbi\frp\basic.lua:146
 msgid "Server List"
 msgstr "服务器列表"
 
+#: luasrc\model\cbi\frp\basic.lua:163
 msgid "Server Remark Name"
 msgstr "服务器备注"
 
-msgid "Server User"
-msgstr "登陆用户"
 
 #: luasrc\controller\frp.lua:12
 msgid "Plugin Log"
