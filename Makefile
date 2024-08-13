@@ -9,16 +9,10 @@ include $(TOPDIR)/rules.mk
 LUCI_TITLE:=LuCI for FRPC
 LUCI_DEPENDS:=+wget +frpc
 LUCI_PKGARCH:=all
-LUCI_LANG:=zh-cn
 
 PKG_NAME:=luci-app-multi-frpc
 PKG_VERSION:=1.0.1
 PKG_RELEASE:=2
-
-define Package/luci-app-multi-frpc/install
-    $(INSTALL_DIR) $(1)/usr/lib/lua/luci/i18n
-    $(INSTALL_DATA) $(PKG_BUILD_DIR)/po/zh-cn/frp.po $(1)/usr/lib/lua/luci/i18n/
-endef
 
 include $(TOPDIR)/feeds/luci/luci.mk
 
