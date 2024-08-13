@@ -7,7 +7,7 @@
 include $(TOPDIR)/rules.mk
 
 LUCI_TITLE:=LuCI for FRPC
-LUCI_DEPENDS:=+wget +frpc
+LUCI_DEPENDS:=+wget +frpc +gettext
 LUCI_PKGARCH:=all
 
 PKG_NAME:=luci-app-multi-frpc
