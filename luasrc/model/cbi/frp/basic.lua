@@ -7,8 +7,8 @@ local a, t, e
 local n = {}
 
 a = Map("frp")
-a.title = translate("Frp Setting")
-a.description = translate("Frp is a fast reverse proxy to help you expose a local server behind a NAT or firewall to the internet.")
+a.title = translate("Frp 内网穿透")
+a.description = translate("Frp 是一个可用于内网穿透的高性能的反向代理应用。")
 
 a:section(SimpleSection).template  = "frp/frp_status"
 
@@ -16,125 +16,125 @@ t = a:section(NamedSection, "common", "frp")
 t.anonymous = true
 t.addremove = false
 
-t:tab("base", translate("Basic Settings"))
-t:tab("other", translate("Other Settings"))
+t:tab("base"， translate("基本设置"))
+t:tab("other"， translate("其他设置"))
 
-e = t:taboption("base", Flag, "enabled", translate("Enabled"))
+e = t:taboption("base", Flag, "enabled"， translate("启用"))
 e.rmempty = false
 
-e = t:taboption("base", Value, "vhost_http_port", translate("Vhost HTTP Port"))
+e = t:taboption("base", Value, "vhost_http_port"， translate("HTTP 穿透服务端口"))
 e.datatype = "port"
 e.rmempty = false
 
-e = t:taboption("base", Value, "vhost_https_port", translate("Vhost HTTPS Port"))
+e = t:taboption("base", Value, "vhost_https_port"， translate("HTTPS 穿透服务端口"))
 e.datatype = "port"
 e.rmempty = false
 
-e = t:taboption("base", Value, "time", translate("Service registration interval"))
-e.description = translate("0 means disable this feature, unit: min")
+e = t:taboption("base", Value, "time"， translate("服务注册间隔"))
+e.description = translate("0表示禁用定时注册功能，单位：分钟")
 e.datatype = "range(0,59)"
 e.default = 30
 e.rmempty = false
 
 -- Other
 
-e = t:taboption("other", Flag, "login_fail_exit", translate("Exit program when first login failed"))
-e.description = translate("decide if exit program when first login failed, otherwise continuous relogin to frps.")
+e = t:taboption("other", Flag, "login_fail_exit"， translate("初始登录失败即退出程序"))
+e.description = translate("第一次登录失败就退出程序，否则将持续尝试登陆 Frp 服务器。")
 e.default = "1"
 e.rmempty = false
 
-e = t:taboption("other", Flag, "tcp_mux", translate("TCP Stream Multiplexing"))
-e.description = translate("Default is Ture. This feature in frps.ini and frpc.ini must be same.")
+e = t:taboption("other", Flag, "tcp_mux"， translate("TCP 端口复用"))
+e.description = translate("该功能默认启用，该配置项在服务端和客户端必须保持一致。")
 e.default = "1"
 e.rmempty = false
 
-e = t:taboption("other", Flag, "tls_enable", translate("Use TLS Connection"))
-e.description = translate("if tls_enable is true, frpc will connect frps by tls.")
+e = t:taboption("other"， Flag， "tls_enable"， translate("TLS 连接"))
+e.description = translate("使用 TLS 协议与服务器连接(若连接服务器异常可以尝试开启)")
 e.default = "0"
 e.rmempty = false
 
-e = t:taboption("other", Flag, "enable_custom_certificate", translate("Custom TLS Protocol Encryption"))
-e.description = translate("Frp supports traffic encryption between frpc and frps through the TLS protocol, and supports client or server unidirectional and bidirectional authentication.")
+e = t:taboption("other", Flag, "enable_custom_certificate"， translate("自定义TLS协议加密"))
+e.description = translate("frp 支持 frpc 和 frps 之间的流量通过 TLS 协议加密，并且支持客户端或服务端单向验证，双向验证等功能。")
 e.default = "0"
 e.rmempty = false
-e:depends("tls_enable", 1)
+e:depends("tls_enable"， 1)
 
-e = t:taboption("other", Value, "tls_cert_file", translate("Client Certificate File"))
-e.description = translate("Frps one-way verifies the identity of frpc.")
+e = t:taboption("other", Value, "tls_cert_file"， translate("TLS 客户端证书文件路径"))
+e.description = translate("frps 单向验证 frpc 身份。")
 e.placeholder = "/var/etc/frp/client.crt"
 e.optional = false
 e:depends("enable_custom_certificate", 1)
 
-e = t:taboption("other", Value, "tls_key_file", translate("Client Key File"))
-e.description = translate("Frps one-way verifies the identity of frpc.")
+e = t:taboption("other", Value, "tls_key_file", translate("TLS 客户端密钥文件路径"))
+e.description = translate("frps 单向验证 frpc 身份。")
 e.placeholder = "/var/etc/frp/client.key"
 e.optional = false
 e:depends("enable_custom_certificate", 1)
 
-e = t:taboption("other", Value, "tls_trusted_ca_file", translate("CA Certificate File"))
-e.description = translate("Frpc one-way verifies the identity of frps.")
+e = t:taboption("other", Value, "tls_trusted_ca_file", translate("TLS CA 证书路径"))
+e.description = translate("frpc 单向验证 frps 身份。")
 e.placeholder = "/var/etc/frp/ca.crt"
 e.optional = false
 e:depends("enable_custom_certificate", 1)
 
-e = t:taboption("other", ListValue, "protocol", translate("Protocol Type"))
-e.description = translate("Frp support kcp protocol since v0.12.0")
+e = t:taboption("other", ListValue, "protocol", translate("协议类型"))
+e.description = translate("从 v0.12.0 版本开始，底层通信协议支持选择 kcp 协议加速。")
 e.default = "tcp"
-e:value("tcp", translate("TCP Protocol"))
-e:value("kcp", translate("KCP Protocol"))
+e:value("tcp", translate("TCP 协议"))
+e:value("kcp", translate("KCP 协议"))
 
-e = t:taboption("other", Flag, "enable_http_proxy", translate("Connect frps by HTTP PROXY"))
-e.description = translate("frpc can connect frps using HTTP PROXY")
+e = t:taboption("other", Flag, "enable_http_proxy", translate("通过代理连接 frps"))
+e.description = translate("frpc 支持通过 HTTP PROXY 和 frps 进行通信")
 e.default = "0"
 e.rmempty = false
 e:depends("protocol", "tcp")
 
-e = t:taboption("other", Value, "http_proxy", translate("HTTP PROXY"))
+e = t:taboption("other", Value, "http_proxy", translate("HTTP 代理"))
 e.placeholder = "http://user:pwd@192.168.1.128:8080"
 e:depends("enable_http_proxy", 1)
 e.optional = false
 
-e = t:taboption("other", Flag, "enable_cpool", translate("Enable Connection Pool"))
-e.description = translate("This feature is fit for a large number of short connections.")
+e = t:taboption("other", Flag, "enable_cpool", translate("启用连接池功能"))
+e.description = translate("适合有大量短连接请求时开启")
 e.rmempty = false
 
-e = t:taboption("other", Value, "pool_count", translate("Connection Pool"))
-e.description = translate("Connections will be established in advance.")
+e = t:taboption("other", Value, "pool_count", translate("指定预创建连接的数量"))
+e.description = translate("frpc 会预先和服务端建立起指定数量的连接。")
 e.datatype = "uinteger"
 e.default = "1"
 e:depends("enable_cpool", 1)
 e.optional = false
 
-e = t:taboption("other", ListValue, "log_level", translate("Log Level"))
+e = t:taboption("other", ListValue, "log_level", translate("日志记录等级"))
 e.default = "warn"
-e:value("trace", translate("Trace"))
-e:value("debug", translate("Debug"))
-e:value("info", translate("Info"))
-e:value("warn", translate("Warning"))
-e:value("error", translate("Error"))
+e:value("trace", translate("追踪"))
+e:value("debug", translate("调试"))
+e:value("info", translate("信息"))
+e:value("warn", translate("警告"))
+e:value("error", translate("错误"))
 
-e = t:taboption("other", Value, "log_max_days", translate("Log Keepd Max Days"))
+e = t:taboption("other", Value, "log_max_days", translate("日志记录天数"))
 e.datatype = "uinteger"
 e.default = "3"
 e.rmempty = false
 e.optional = false
 
-e = t:taboption("other", Flag, "admin_enable", translate("Enable Web API"))
-e.description = translate("set admin address for control frpc's action by http api such as reload.")
+e = t:taboption("other", Flag, "admin_enable", translate("开启网页管理"))
+e.description = translate("可通过http查看客户端状态以及通过API控制")
 e.default = "0"
 e.rmempty = false
 
-e = t:taboption("other", Value, "admin_port", translate("Admin Web Port"))
+e = t:taboption("other", Value, "admin_port", translate("管理员端口号"))
 e.datatype = "port"
 e.default = 7400
 e:depends("admin_enable", 1)
 
-e = t:taboption("other", Value, "admin_user", translate("Admin Web UserName"))
+e = t:taboption("other", Value, "admin_user", translate("管理员用户名"))
 e.optional = false
 e.default = "admin"
 e:depends("admin_enable", 1)
 
-e = t:taboption("other", Value, "admin_pwd", translate("Admin Web PassWord"))
+e = t:taboption("other", Value, "admin_pwd", translate("管理员密码"))
 e.optional = false
 e.default = "admin"
 e.password = true
@@ -143,7 +143,7 @@ e:depends("admin_enable", 1)
 
 -- Server List
 
-t = a:section(TypedSection, "server", translate("Server List"))
+t = a:section(TypedSection, "server", translate("服务器列表"))
 t.anonymous = true
 t.addremove = true
 t.template = "cbi/tblsection"
@@ -160,24 +160,24 @@ function t.remove(e,t)
     luci.http.redirect(o.build_url("admin","services","frp"))
 end
 
-e = t:option(DummyValue, "name", translate("Server Remark Name"))
+e = t:option(DummyValue, "name", translate("服务器备注"))
 
-e = t:option(DummyValue, "server_addr", translate("Server Address"))
+e = t:option(DummyValue, "server_addr", translate("服务器地址"))
 e.width = "30%"
 
-e = t:option(DummyValue, "server_port", translate("Server Port"))
+e = t:option(DummyValue, "server_port", translate("端口"))
 e.width = "15%"
 
-e = t:option(DummyValue, "user", translate("Server User"))
+e = t:option(DummyValue, "user", translate("用户名"))
 e.width = "15%"
 
-e = t:option(Flag, "enabled", translate("Enable State"))
+e = t:option(Flag, "enabled", translate("开启状态"))
 e.width = "10%"
 e.rmempty = false
 
 -- Service Lists
 
-t = a:section(TypedSection, "proxy", translate("Services List"))
+t = a:section(TypedSection, "proxy", translate("服务列表"))
 t.anonymous = true
 t.addremove = true
 t.template = "cbi/tblsection"
@@ -195,13 +195,13 @@ luci.http.redirect(o.build_url("admin","services","frp"))
 end
 
 local o = ""
-e = t:option(DummyValue, "remark", translate("Service Remark Name"))
+e = t:option(DummyValue, "remark", translate("服务备注名"))
 e.width = "10%"
 
-e = t:option(DummyValue, "type", translate("Frp Protocol Type"))
+e = t:option(DummyValue, "type", translate("Frp 协议类型"))
 e.width = "10%"
 
-e = t:option(DummyValue, "custom_domains", translate("Domain/Subdomain"))
+e = t:option(DummyValue, "custom_domains", translate("域名/子域名"))
 e.width = "20%"
 
 e.cfgvalue = function(t,n)
@@ -217,7 +217,7 @@ local c = a.uci:get(i,n,"subdomain")or""
 b="%s/%s"%{b,c} return b end
 end
 
-e = t:option(DummyValue, "remote_port", translate("Remote Port"))
+e = t:option(DummyValue, "remote_port", translate("远程主机端口"))
 e.width = "10%"
 e.cfgvalue = function(t,b)
 local t = a.uci:get(i,b,"type")or""
@@ -230,13 +230,13 @@ if t=="tcp" or t=="udp" then
 local b = a.uci:get(i,b,"remote_port")or"" return b end
 end
 
-e = t:option(DummyValue, "local_ip", translate("Local Host Address"))
+e = t:option(DummyValue, "local_ip", translate("内网主机地址"))
 e.width = "15%"
 
-e = t:option(DummyValue, "local_port", translate("Local Host Port"))
+e = t:option(DummyValue, "local_port", translate("内网主机端口"))
 e.width = "10%"
 
-e = t:option(DummyValue, "use_encryption", translate("Use Encryption"))
+e = t:option(DummyValue, "use_encryption", translate("开启数据加密"))
 e.width = "15%"
 
 e.cfgvalue = function(t,n)
@@ -248,7 +248,7 @@ else b="OFF" end
 return b
 end
 
-e = t:option(DummyValue, "use_compression", translate("Use Compression"))
+e = t:option(DummyValue, "use_compression", translate("使用压缩"))
 e.width = "15%"
 e.cfgvalue = function(t,n)
 local t = a.uci:get(i,n,"use_compression")or""
@@ -259,7 +259,7 @@ else b="OFF" end
 return b
 end
 
-e = t:option(Flag, "enable", translate("Enable State"))
+e = t:option(Flag, "enable", translate("开启状态"))
 e.width = "10%"
 e.rmempty = false
 
