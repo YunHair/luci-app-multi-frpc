@@ -16,50 +16,50 @@ t = a:section(NamedSection, "common", "frp")
 t.anonymous = true
 t.addremove = false
 
-t:tab("base"， translate("基本设置"))
-t:tab("other"， translate("其他设置"))
+t:tab("base", translate("基本设置"))
+t:tab("other", translate("其他设置"))
 
-e = t:taboption("base", Flag, "enabled"， translate("启用"))
+e = t:taboption("base", Flag, "enabled", translate("启用"))
 e.rmempty = false
 
-e = t:taboption("base", Value, "vhost_http_port"， translate("HTTP 穿透服务端口"))
+e = t:taboption("base", Value, "vhost_http_port", translate("HTTP 穿透服务端口"))
 e.datatype = "port"
 e.rmempty = false
 
-e = t:taboption("base", Value, "vhost_https_port"， translate("HTTPS 穿透服务端口"))
+e = t:taboption("base", Value, "vhost_https_port", translate("HTTPS 穿透服务端口"))
 e.datatype = "port"
 e.rmempty = false
 
-e = t:taboption("base", Value, "time"， translate("服务注册间隔"))
-e.description = translate("0表示禁用定时注册功能，单位：分钟")
+e = t:taboption("base", Value, "time", translate("服务注册间隔"))
+e.description = translate("0表示禁用定时注册功能,单位：分钟")
 e.datatype = "range(0,59)"
 e.default = 30
 e.rmempty = false
 
 -- Other
 
-e = t:taboption("other", Flag, "login_fail_exit"， translate("初始登录失败即退出程序"))
-e.description = translate("第一次登录失败就退出程序，否则将持续尝试登陆 Frp 服务器。")
+e = t:taboption("other", Flag, "login_fail_exit", translate("初始登录失败即退出程序"))
+e.description = translate("第一次登录失败就退出程序,否则将持续尝试登陆 Frp 服务器。")
 e.default = "1"
 e.rmempty = false
 
-e = t:taboption("other", Flag, "tcp_mux"， translate("TCP 端口复用"))
-e.description = translate("该功能默认启用，该配置项在服务端和客户端必须保持一致。")
+e = t:taboption("other", Flag, "tcp_mux", translate("TCP 端口复用"))
+e.description = translate("该功能默认启用,该配置项在服务端和客户端必须保持一致。")
 e.default = "1"
 e.rmempty = false
 
-e = t:taboption("other"， Flag， "tls_enable"， translate("TLS 连接"))
+e = t:taboption("other", Flag, "tls_enable", translate("TLS 连接"))
 e.description = translate("使用 TLS 协议与服务器连接(若连接服务器异常可以尝试开启)")
 e.default = "0"
 e.rmempty = false
 
-e = t:taboption("other", Flag, "enable_custom_certificate"， translate("自定义TLS协议加密"))
-e.description = translate("frp 支持 frpc 和 frps 之间的流量通过 TLS 协议加密，并且支持客户端或服务端单向验证，双向验证等功能。")
+e = t:taboption("other", Flag, "enable_custom_certificate", translate("自定义TLS协议加密"))
+e.description = translate("frp 支持 frpc 和 frps 之间的流量通过 TLS 协议加密,并且支持客户端或服务端单向验证,双向验证等功能。")
 e.default = "0"
 e.rmempty = false
-e:depends("tls_enable"， 1)
+e:depends("tls_enable", 1)
 
-e = t:taboption("other", Value, "tls_cert_file"， translate("TLS 客户端证书文件路径"))
+e = t:taboption("other", Value, "tls_cert_file", translate("TLS 客户端证书文件路径"))
 e.description = translate("frps 单向验证 frpc 身份。")
 e.placeholder = "/var/etc/frp/client.crt"
 e.optional = false
@@ -78,7 +78,7 @@ e.optional = false
 e:depends("enable_custom_certificate", 1)
 
 e = t:taboption("other", ListValue, "protocol", translate("协议类型"))
-e.description = translate("从 v0.12.0 版本开始，底层通信协议支持选择 kcp 协议加速。")
+e.description = translate("从 v0.12.0 版本开始,底层通信协议支持选择 kcp 协议加速。")
 e.default = "tcp"
 e:value("tcp", translate("TCP 协议"))
 e:value("kcp", translate("KCP 协议"))
