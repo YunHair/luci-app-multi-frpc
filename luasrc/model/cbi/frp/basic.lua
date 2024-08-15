@@ -7,8 +7,8 @@ local a, t, e
 local n = {}
 
 a = Map("frp")
-a.title = translate("Multi Frpc 内网穿透")
-a.description = translate("Frp 是一个可用于内网穿透的高性能的反向代理应用，Multi Frpc 是一款支持多服务端的 Frp 客户端插件。")
+a.title = translate("MultiFrpc 内网穿透")
+a.description = translate("Frp 是一个可用于内网穿透的高性能的反向代理应用，MultiFrpc 是一款支持多服务端的 Frp 客户端插件。")
 
 a:section(SimpleSection).template  = "frp/frp_status"
 
